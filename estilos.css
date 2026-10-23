@@ -1,0 +1,67 @@
+
+body {
+  /* Sustituye esto por la ruta de tu foto del edificio */
+  background-image: url('imagenes/imagen_fondo.jpg'); 
+  background-size: cover; 
+  background-position: center center; 
+  background-attachment: fixed; 
+  background-repeat: no-repeat; 
+  background-color: #f8f9fa; /* Respaldo */
+}
+
+#encabezadoBienvenida {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+/* Estilo del carrusel */
+/*Ponemos !important para que se aplique nuestra regla en vez de las de bootstrap*/
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.492);
+  left: 0 !important; 
+  right: 0 !important;
+}
+.carousel-caption h3 {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Estilo de los elementos de navegación (tabs)*/
+.nav-tabs .nav-link {
+  background-color: rgba(255, 255, 255, 0.55); 
+  color: var(--bs-primary); 
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-right: 4px;
+}
+
+.nav-tabs .nav-link:hover {
+  background-color: #e9e5e5; 
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+.nav-tabs .nav-link.active {
+  background-color:var(--bs-primary) !important;
+  color: white !important;
+  font-weight: bold; 
+  
+  /* Estilo de la sección catálogo*/}
+#contenedorTarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Para que se ajusten al espacio del contenedor*/
+  gap: 20px;
+}
+.tarjeta {
+  background-color: rgb(227, 227, 227);
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 15px;
+  min-width: 0; /*Para que la tarjeta mantenga su tamaño a pesar del contenido*/
+  display: flex;
+  flex-direction: column;
+}
+
+.img-tarjeta {
+  width: 100%;
+  height: 140px;
+  object-fit: contain; /*Para que la imagen se adapte al contenedor*/
+  margin-bottom: 15px;
+}
