@@ -16,12 +16,12 @@ El proyecto abarca todo el flujo de desarrollo de bases de datos y su integraci�
 
 - diseño conceptual (diagrama Entidad-Relación);
 
-![Diagrama Entidad-Relación](image.png)
+![Diagrama Entidad-Relación](esquemas/BocetoDER.png)
 
 - diseño lógico (paso al modelo relacional);
 - implementación en un Sistema de Gestión de Bases de Datos Relacionales (MySQL);
 
-![Esquema en MySQLWorkbench](image-1.png)
+![Esquema en MySQLWorkbench](esquemas/DiseñoMWB.png)
 
 - implementación en un modelo NoSQL orientado a documentos (MongoDB);
 - desarrollo de un servidor backend en Node.js;
@@ -83,10 +83,7 @@ npm init -y
 El backend en Node.js requiere de ciertos paquetes para levantar el servidor y conectar con los diferentes motores de base de datos. Instala las dependencias ejecutando:
 
 ```bash
-npm install express
-npm install mysql2
-npm install mongodb
-npm install cors
+npm install express cors mysql2 mongodb
 ```
 
 ---
@@ -95,9 +92,42 @@ npm install cors
 
 Para ejecutar el flujo completo y levantar el servidor web:
 
-1. Asegúrate de tener los servicios de MySQL y MongoDB iniciados en tu máquina.
-2. Ejecuta los scripts de creación e inserción de datos en tus gestores locales.
-3. Inicia el servidor Node.js mediante el siguiente comando:
+### 6.1. Conexión a las Bases de Datos
+
+**MySQL (vía XAMPP)**
+
+1. Abre el panel de control de XAMPP e inicia el módulo de **MySQL** (y **Apache** si vas a usar phpMyAdmin).
+
+2. Abre tu gestor de bases de datos (puedes usar MySQL Workbench o acceder a `http://localhost/phpmyadmin` en tu navegador).
+
+3. Importa los scripts que se encuentran en la carpeta `dbs/mysql`:
+   - Primero, ejecuta el archivo `farmacia.sql` para crear la estructura relacional.
+   - A continuación, ejecuta `inserciones.sql` para poblar las tablas con los datos de prueba.
+
+**MongoDB**
+
+1. Abre una terminal e introduce:
+
+```bash
+mongod
+```
+
+2. Abre una nueva terminal desde la carpeta `dbs/mongodb` e importa las colecciones desde los archivos JSON ejecutando los siguientes comandos:
+
+```bash
+mongoimport -d farmacia -c producto --file Productos.json --jsonArray
+mongoimport -d farmacia -c principio --file Principio.json --jsonArray
+```
+
+3. Una vez iniciada la conexión e importados los datos, introducir en el gestor correspondiente la orden:
+
+```bash
+use farmacia
+```
+
+### 6.2. Ejecutar el servidor
+
+Introduce en una terminal desde la carpeta del proyecto:
 
 ```bash
 node server.js
@@ -148,4 +178,6 @@ A modo de resumen, el proyecto puede reproducirse completamente siguiendo estos 
 - **Volumen de datos:** Debido al alto volumen real de una farmacia, se ha utilizado una muestra representativa (aprox. 100 productos) para evitar sobrecargas computacionales, con datos de ventas, pedidos y lotes generados mediante Inteligencia Artificial para garantizar la integridad referencial.
 - **Diseño NoSQL (MongoDB):** Se aplicó el enfoque _one-way embedding_ para la relación `BASADO` (embebiendo `PRINCIPIO` dentro de `MEDICAMENTO`) y referencias manuales para las relaciones reflexivas como `INCOMPATIBLE`.
 
-**_Nota:_** _Los registros asociados a empleados y profesionales de la salud en el presente proyecto son de naturaleza ficticia, elaborados con el objetivo de ilustrar el sistema. Toda coincidencia con la realidad resulta meramente accidental._
+**_Nota 1:_** _Los registros asociados a empleados y profesionales de la salud en el presente proyecto son de naturaleza ficticia, elaborados con el objetivo de ilustrar el sistema. Toda coincidencia con la realidad resulta meramente accidental._
+
+**_Nota 2:_** _Los registros de la base de datos fueron actualizados por última vez en junio de 2026. Esto puede afectar a algunas funcionalidades de la página web._
